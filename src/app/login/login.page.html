@@ -7,7 +7,7 @@
         </ion-card-header>
 
         <ion-card-content>
-          <form [formGroup]="loginForm">
+          <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
             <ion-item>
               <ion-input
                 formControlName="unique"
@@ -53,14 +53,23 @@
             </div>
 
             <ion-button
+              *ngIf="!loading"
               [disabled]="!loginForm.valid"
               padding
               shape="round"
               color="primary"
               expand="block"
-              (click)="login()"
+              (click)="onSubmit()"
               >Login</ion-button
             >
+            <ion-row justify-content-center align-items-center *ngIf="loading">
+              <ion-item>
+                <ion-spinner></ion-spinner>
+              </ion-item>
+            </ion-row>
+            <ion-row justify-content-center align-items-center padding>
+              <a routerLink="/register" class="btn btn-link">Cadastrar</a>
+            </ion-row>
           </form>
         </ion-card-content>
       </ion-card>
